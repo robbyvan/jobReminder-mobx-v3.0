@@ -15484,6 +15484,8 @@
 
 	__webpack_require__(253);
 
+	var allJobState = new _AllJobState2.default();
+
 	var App = exports.App = function (_Component) {
 	  _inherits(App, _Component);
 
@@ -15508,7 +15510,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'page-content' },
-	          this.props.location.pathname === "/" ? React.createElement(_JobCount2.default, { jobs: _AllJobState2.default }) : this.props.location.pathname === "/addjob" ? React.createElement(_JobCount2.default, null) : React.createElement(_JobCount2.default, null)
+	          this.props.location.pathname === "/" ? React.createElement(_JobCount2.default, { allJobState: allJobState }) : this.props.location.pathname === "/addjob" ? React.createElement(_JobCount2.default, { allJobState: allJobState }) : React.createElement(_JobCount2.default, { allJobState: allJobState })
 	        )
 	      );
 	    }
@@ -15580,9 +15582,73 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        this.props.jobs.length
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'jobCount-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'totalJobs' },
+	            _react2.default.createElement(_paperPlaneO2.default, null),
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              'Total ',
+	              this.props.allJobState.jobs.length
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'jobStatus' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/joblist/replied' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'repliedJobs status-block' },
+	                _react2.default.createElement(_calendarCheckO2.default, null),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  'Replied ',
+	                  this.props.allJobState.repliedJobs.length
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/joblist/pending' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'pendingJobs status-block' },
+	                _react2.default.createElement(_calendarO2.default, null),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  'Pending ',
+	                  this.props.allJobState.pendingJobs.length
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/joblist/declined' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'declinedJobs status-block' },
+	                _react2.default.createElement(_calendarTimesO2.default, null),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  'Declined ',
+	                  this.props.allJobState.declinedJobs.length
+	                )
+	              )
+	            ),
+	            _react2.default.createElement('div', { className: 'status-block blank-status' })
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -15599,34 +15665,148 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	   value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _desc, _value, _class, _descriptor;
 
 	var _mobx = __webpack_require__(81);
 
-	var AllJobState = (0, _mobx.observable)([{
-	   "id": 0,
-	   "company": "Alibaba",
-	   "appliedDate": "03-01-2017",
-	   "position": "Front-End Engineer",
-	   "status": "Replied",
-	   "jobLink": "http://www.alibabagroup.com/en/global/careers"
-	}, {
-	   "id": 1,
-	   "company": "Tencent",
-	   "appliedDate": "03-01-2017",
-	   "position": "Front-End Developer",
-	   "status": "Pending",
-	   "jobLink": "http://join.qq.com/"
-	}, {
-	   "id": 2,
-	   "company": "LiveRamp",
-	   "appliedDate": "03-01-2017",
-	   "position": "2017 Summer Intern",
-	   "status": "Declined",
-	   "jobLink": "https://www.redfin.com/about/jobs"
-	}]);
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+	function _initDefineProp(target, property, descriptor, context) {
+	  if (!descriptor) return;
+	  Object.defineProperty(target, property, {
+	    enumerable: descriptor.enumerable,
+	    configurable: descriptor.configurable,
+	    writable: descriptor.writable,
+	    value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+	  });
+	}
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	  var desc = {};
+	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	    desc[key] = descriptor[key];
+	  });
+	  desc.enumerable = !!desc.enumerable;
+	  desc.configurable = !!desc.configurable;
+
+	  if ('value' in desc || desc.initializer) {
+	    desc.writable = true;
+	  }
+
+	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	    return decorator(target, property, desc) || desc;
+	  }, desc);
+
+	  if (context && desc.initializer !== void 0) {
+	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	    desc.initializer = undefined;
+	  }
+
+	  if (desc.initializer === void 0) {
+	    Object['define' + 'Property'](target, property, desc);
+	    desc = null;
+	  }
+
+	  return desc;
+	}
+
+	function _initializerWarningHelper(descriptor, context) {
+	  throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+	}
+
+	var AllJobState = (_class = function () {
+	  function AllJobState() {
+	    _classCallCheck(this, AllJobState);
+
+	    _initDefineProp(this, "jobs", _descriptor, this);
+	  }
+
+	  _createClass(AllJobState, [{
+	    key: "addJob",
+	    value: function addJob(newJob) {
+	      this.jobs = [].concat(_toConsumableArray(this.job), [newJob]);
+	    }
+	  }, {
+	    key: "removeJob",
+	    value: function removeJob(key) {
+	      this.jobs = this.jobs.filter(function (job) {
+	        return job.id !== key;
+	      });
+	    }
+	  }, {
+	    key: "editJob",
+	    value: function editJob(key, newJob) {
+	      this.jobs = this.jobs.map(function (job) {
+	        if (job.id === key) {
+	          job = newJob;
+	        }
+	        return job;
+	      });
+	    }
+	  }, {
+	    key: "repliedJobs",
+	    get: function get() {
+	      return this.jobs.filter(function (job) {
+	        if (job.status.toLowerCase() === "replied") {
+	          return job;
+	        }
+	      });
+	    }
+	  }, {
+	    key: "pendingJobs",
+	    get: function get() {
+	      return this.jobs.filter(function (job) {
+	        if (job.status.toLowerCase() === "pending") {
+	          return job;
+	        }
+	      });
+	    }
+	  }, {
+	    key: "declinedJobs",
+	    get: function get() {
+	      return this.jobs.filter(function (job) {
+	        if (job.status.toLowerCase() === "declined") {
+	          return job;
+	        }
+	      });
+	    }
+	  }]);
+
+	  return AllJobState;
+	}(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "jobs", [_mobx.observable], {
+	  enumerable: true,
+	  initializer: function initializer() {
+	    return [{
+	      "id": 0,
+	      "company": "Alibaba",
+	      "appliedDate": "03-01-2017",
+	      "position": "Front-End Engineer",
+	      "status": "Replied",
+	      "jobLink": "http://www.alibabagroup.com/en/global/careers"
+	    }, {
+	      "id": 1,
+	      "company": "Tencent",
+	      "appliedDate": "03-01-2017",
+	      "position": "Front-End Developer",
+	      "status": "Pending",
+	      "jobLink": "http://join.qq.com/"
+	    }, {
+	      "id": 2,
+	      "company": "LiveRamp",
+	      "appliedDate": "03-01-2017",
+	      "position": "2017 Summer Intern",
+	      "status": "Declined",
+	      "jobLink": "https://www.redfin.com/about/jobs"
+	    }];
+	  }
+	}), _applyDecoratedDescriptor(_class.prototype, "repliedJobs", [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, "repliedJobs"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "pendingJobs", [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, "pendingJobs"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "declinedJobs", [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, "declinedJobs"), _class.prototype)), _class);
 	exports.default = AllJobState;
 
 /***/ },

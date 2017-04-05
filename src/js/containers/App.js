@@ -4,10 +4,9 @@ import AllJobState from './../states/AllJobState'
 
 import Menu from './../components/Menu'
 import JobCount from './JobCount'
+import JobBoard from './JobBoard'
 
 require('./../../stylesheets/app.scss');
-
-const allJobState = new AllJobState();
 
 export class App extends Component {
   render() {
@@ -19,10 +18,10 @@ export class App extends Component {
         <div className="page-content">
             {
               (this.props.location.pathname === "/") ?
-                <JobCount allJobState={ allJobState }/> :
+                <JobCount /> :
               (this.props.location.pathname === "/addjob")?
                 <JobCount /> :
-              <JobCount />
+              <JobBoard jobFilter={ this.props.params.filter } />
             }
           </div>
 
