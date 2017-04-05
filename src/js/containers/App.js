@@ -5,6 +5,7 @@ import AllJobState from './../states/AllJobState'
 import Menu from './../components/Menu'
 import JobCount from './JobCount'
 import JobBoard from './JobBoard'
+import AddJobForm from './AddJobForm'
 
 require('./../../stylesheets/app.scss');
 
@@ -20,7 +21,7 @@ export class App extends Component {
               (this.props.location.pathname === "/") ?
                 <JobCount /> :
               (this.props.location.pathname === "/addjob")?
-                <JobCount /> :
+                <AddJobForm /> :
               <JobBoard jobFilter={ this.props.params.filter } />
             }
           </div>

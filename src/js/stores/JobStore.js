@@ -70,11 +70,10 @@ class JobStore {
     }else {
       return false;//no such filter
     }
-
   }
 
   addJob(newJob) {
-    this.jobs = [...this.job, newJob];
+    this.jobs.push(newJob) ;
   }
 
   removeJob(key) {

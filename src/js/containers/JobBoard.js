@@ -11,10 +11,6 @@ require('./../../stylesheets/JobBoard.scss')
 @inject('jobStore') @observer
 class JobBoard extends Component {
 
-  // constructor(props) {
-  //   // super(props);
-  // }
-
   componentWillUpdate(nextProps) {
     this.props.jobStore.changeJobFilter(nextProps.jobFilter);
   }
