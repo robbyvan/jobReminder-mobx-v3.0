@@ -1,0 +1,73 @@
+@import "default";
+
+.jobBlock {
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px 2px $shadow-color;
+  width: 270px;
+  height: 320px; 
+  margin: 10px;
+  background-color: $jobBlock-color;
+  color: $blockText-color;
+  button {
+    border:none;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    font-size: 1em;
+    color: #fff;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}
+
+.jobBlock {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  a {
+    display: block;
+    text-align: center;
+  }
+  a, a:visited, a:link {
+    color: $replied-color;
+  }
+  h2, h3, h4, a, button {
+    margin: 8px auto;
+  }
+  
+  h2 {
+    font-size: 1.8em;
+  }
+  h4 {
+    font-size: 1em;
+    text-align: right;
+  }
+  .position-display {
+    font-size: 1.2em;
+    text-align: center;
+  }
+  .status-display {
+    text-align: center;
+    font-size: 1.5em;
+  }
+  .editJob, .saveJob {
+    background-color: $main-color;
+  }
+  .removeJob {
+    background-color: $title-color;
+  }
+  input {
+    height: 30px;
+    margin: 5px;
+    line-height: 30px;
+    font-size: .7em;
+    padding-left: 5px;
+  } 
+  &:empty {
+    height: 0;
+    box-shadow: none;
+  }
+}

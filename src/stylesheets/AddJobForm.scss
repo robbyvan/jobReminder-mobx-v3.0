@@ -1,0 +1,33 @@
+@import "default";
+
+.add-job-form {
+  width: 80%;
+  margin: 40px auto; 
+  display: flex;
+  flex-direction: column;
+}
+
+.add-job-form {
+  label, button {
+    margin-top: 20px;
+    font-size: .9em;
+  }
+  input {
+    font-family: $input-font;
+    font-size: .9em;
+    margin-top: 8px;
+    box-sizing: border-box;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+  }
+  button {
+    border: none;
+    height: 40px;
+    background-color: $replied-color;
+    color: #fff;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}
