@@ -3,7 +3,8 @@ import { Link } from 'react-router'
 
 import { inject, observer } from 'mobx-react'
 
-import JobBoardNav from './../components/JobBoardNav.js'
+import JobBoardNav from './../components/JobBoardNav'
+import JobBlock from './JobBlock'
 
 require('./../../stylesheets/JobBoard.scss')
 
@@ -46,7 +47,6 @@ class JobBoard extends Component {
               <div className="jobBlock"></div>
           </div>)
         }
-        <h1>{viewJobs.length}</h1>
       </div>
     );
   }
