@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {  Router, Route, hashHistory } from 'react-router'
 
-import App from './../containers/App'
+import App from './App'
 import Whoops404 from './Whoops404'
 
 const AppRoutes = () => {
