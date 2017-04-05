@@ -2,10 +2,10 @@ import { Component } from 'react'
 
 import AllJobState from './../states/AllJobState'
 
-import Menu from './../components/Menu'
-import JobCount from './JobCount'
-import JobBoard from './JobBoard'
-import AddJobForm from './AddJobForm'
+import Menu from './Menu'
+import JobCount from './../containers/JobCount'
+import JobBoard from './../containers/JobBoard'
+import AddJobForm from './../containers/AddJobForm'
 
 require('./../../stylesheets/app.scss');
 
