@@ -1,7 +1,5 @@
 import { Component } from 'react'
 
-import AllJobState from './../states/AllJobState'
-
 import Menu from './Menu'
 import JobCount from './../containers/JobCount'
 import JobBoard from './../containers/JobBoard'
