@@ -36,8 +36,8 @@ class JobBoard extends Component {
           (<div className="job-panel">
             {
               viewJobs.map(
-                  (job, i) => <JobBlock key={i}
-                                        {...job}
+                  (job, i) => <JobBlock {...job}
+                                        key={job.id}
                                         />
               )
             }
