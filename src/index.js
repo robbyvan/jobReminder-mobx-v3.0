@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import App from './js/containers/App'
+import AppRoutes from './js/components/AppRoutes'
 
 window.React = React;
 
 render(
-  <App />,
+  <AppRoutes />,
   document.getElementById('react-container')
 );
