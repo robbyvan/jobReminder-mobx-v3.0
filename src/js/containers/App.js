@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import { observable } from 'mobx'
 import { inject } from 'mobx-react'
 
 import Menu from './../components/Menu'
