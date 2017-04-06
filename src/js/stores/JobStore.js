@@ -40,7 +40,7 @@ class JobStore {
 
   @observable jobFilter = undefined;
 
-  @action getJobs() {
+  getJobs() {
     fetchData("https://raw.githubusercontent.com/robbyvan/Job-Reminder/master/dist/data/applications.json", "GET")
       .then((res) => {
         //Can't write like: [this.jobs = res]

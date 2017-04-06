@@ -5,8 +5,9 @@ import { Provider } from 'mobx-react'
 import AppRoutes from './js/components/AppRoutes'
 
 import jobStore from './js/stores/JobStore'
+import UIStore from './js/stores/UIStore'
 
-const stores = { jobStore };
+const stores = { jobStore, UIStore };
 
 window.React = React;
 

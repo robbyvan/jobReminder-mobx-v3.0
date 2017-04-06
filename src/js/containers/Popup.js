@@ -1,12 +1,12 @@
 import { Component, PropTypes } from 'react'
 
-import { observer } from 'mobx-react'
+import { inject } from 'mobx-react'
 
 import CheckIcon from 'react-icons/lib/fa/check'
 
 require('./../../stylesheets/Popup.scss');
 
-@observer
+@inject('UIStore')
 class Popup extends Component {
 
   render() {
@@ -17,11 +17,11 @@ class Popup extends Component {
 
           <div className="Popup-msg">
             <CheckIcon className="check-icon" />  
-            <h2>{this.props.msg}</h2>
+            <h2>{ this.props.msg }</h2>
           </div>
 
           <button className="Popup-button" 
-                  onClick={ () => this.props.togglePopup() }
+                  onClick={ () => this.props.UIStore.togglePopup() }
                   >
             { this.props.button }
           </button>

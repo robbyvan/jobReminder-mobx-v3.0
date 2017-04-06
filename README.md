@@ -5,7 +5,7 @@ A simple app practicing React.js
 
 ## V3.0
 Now This App is refined with ```MobX```, currently based on ```React + MobX + React-Router```.      
-[Job Reminder Demo](https://robbyvan.github.io/jobReminder-mobx-v3.0/dist/#/)
+[Job Reminder Demo](https://robbyvan.github.io/jobReminder-mobx-v3.0/dist/?#/)
 
 ## V2.0    
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.

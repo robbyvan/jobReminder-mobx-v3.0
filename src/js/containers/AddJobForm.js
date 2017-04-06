@@ -7,10 +7,8 @@ import Popup from './Popup.js'
 
 require("./../../stylesheets/AddJobForm.scss")
 
-@inject ('jobStore') @observer
+@inject ('jobStore') @inject('UIStore') @observer
 class AddJobForm extends Component {
-
-  @observable hasPopup = false;
 
   handleSubmit() {
     let newJob = {
@@ -22,12 +20,10 @@ class AddJobForm extends Component {
       jobLink: this.refs.jobLink.value,
     }
     this.props.jobStore.addJob(newJob);
-    this.togglePopup();
+    this.props.UIStore.togglePopup();
   }
 
-  togglePopup() {
-    this.hasPopup = !this.hasPopup;
-  }
+
 
   render() {
     return (
@@ -78,7 +74,7 @@ class AddJobForm extends Component {
           <button onClick={ () => this.handleSubmit() }>Add to Application Reminder</button>
         </form>
         { 
-          (this.hasPopup)? <Popup togglePopup={ () => this.togglePopup() } />: null
+          (this.props.UIStore.hasPopup)? <Popup togglePopup={ () => this.togglePopup() } />: null
         }
       </div>
 
