@@ -10,7 +10,7 @@ Now This App is refined with ```MobX```, currently based on ```React + MobX + Re
 ## V2.0    
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
 
-+ Components(Dump)
++ Components(Dumb)
   - AppRoutes
   - Menu
   - JobBoardNav
