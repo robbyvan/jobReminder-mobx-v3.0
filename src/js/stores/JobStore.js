@@ -81,7 +81,7 @@ class JobStore {
 
   @computed get viewJobs() {
 
-    console.log(this.jobFilter);
+    // console.log(this.jobFilter);
 
     let validFilters = ['replied', "pending", "declined"];
 

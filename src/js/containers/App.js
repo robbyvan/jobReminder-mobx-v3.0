@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { observable } from 'mobx'
 import { inject } from 'mobx-react'
 
 import Menu from './../components/Menu'
@@ -8,11 +9,16 @@ import AddJobForm from './AddJobForm'
 
 require('./../../stylesheets/app.scss');
 
-@inject('jobStore')
+@inject('jobStore') 
 export class App extends Component {
 
   componentDidMount() {
       this.props.jobStore.getJobs();
+  }
+
+  componentWillUpdate(nextProps) {
+    // console.log("what???", this.props.params.filter);
+    this.props.jobStore.changeJobFilter(this.props.params.filter);
   }
 
   render() {
@@ -27,7 +33,7 @@ export class App extends Component {
                 <JobCount /> :
               (this.props.location.pathname === "/addjob")?
                 <AddJobForm /> :
-              <JobBoard jobFilter={ this.props.params.filter } />
+              <JobBoard />
             }
           </div>
 
