@@ -1,35 +1,59 @@
-import { observable, computed } from 'mobx'
+import { observable, computed, action, autorun } from 'mobx'
+
+const fetchData = (url, method) => {
+  return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+    // let xhr = window.XMLHttpRequest()?
+    //           new XMLHttpRequest():
+    //           new ActiveXObject("Microsoft.XMLHTTP");
+
+    xhr.open(method, url);
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+        resolve(xhr.response);
+      }else {
+        reject({
+          status:xhr.status,
+          statusText: xhr.statusText,
+          response: xhr.response
+        });
+      }
+    };
+
+    xhr.onerror = () => {
+      reject({
+          status:xhr.status,
+          statusText: xhr.statusText,
+          response: xhr.response
+        });
+    }
+
+    xhr.send();
+  });
+}
+
 
 class JobStore {
 
-  @observable jobs =  [
-                        {  
-                         "id": 0,       
-                         "company": "Alibaba",
-                         "appliedDate": "03-01-2017",
-                         "position": "Front-End Engineer",
-                         "status": "Replied",
-                         "jobLink": "http://www.alibabagroup.com/en/global/careers"
-                        },
-                        {
-                           "id": 1,
-                           "company": "Tencent",
-                           "appliedDate": "03-01-2017",
-                           "position": "Front-End Developer",
-                           "status": "Pending",
-                           "jobLink": "http://join.qq.com/"
-                        },
-                        {
-                           "id": 2,
-                           "company": "LiveRamp",
-                           "appliedDate": "03-01-2017",
-                           "position": "2017 Summer Intern",
-                           "status": "Declined",
-                           "jobLink": "https://www.redfin.com/about/jobs"
-                        }
-                      ];
+  @observable jobs =  [];
 
   @observable jobFilter = undefined;
+
+  @action getJobs() {
+    fetchData("https://raw.githubusercontent.com/robbyvan/Job-Reminder/master/dist/data/applications.json", "GET")
+      .then((res) => {
+        //Can't write like: [this.jobs = res]
+        JSON.parse(res).map((job) => {
+          // console.log(job);
+          this.jobs.push(job);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err;
+      })
+  }
 
   @computed get repliedJobs(){
     return this.jobs.filter((job) => {

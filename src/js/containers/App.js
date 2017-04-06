@@ -1,13 +1,20 @@
 import { Component } from 'react'
+import { inject } from 'mobx-react'
 
-import Menu from './Menu'
-import JobCount from './../containers/JobCount'
-import JobBoard from './../containers/JobBoard'
-import AddJobForm from './../containers/AddJobForm'
+import Menu from './../components/Menu'
+import JobCount from './JobCount'
+import JobBoard from './JobBoard'
+import AddJobForm from './AddJobForm'
 
 require('./../../stylesheets/app.scss');
 
+@inject('jobStore')
 export class App extends Component {
+
+  componentDidMount() {
+      this.props.jobStore.getJobs();
+  }
+
   render() {
     return (
       <div className="app-container">
