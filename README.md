@@ -23,7 +23,7 @@ Now This App is refined with ```Redux```, currently based on ```React + Redux + 
     + PopUp
 + Actions
   - ADD_JOB, EDIT_JOB, FILTER_JOB, SAVE_JOB, REMOVE_JOB, TOGGLE_POPUP
-+ Reducers:
++ Reducers
   - JobReducer
   - filteredJobsReducer
   - UIReducer
