@@ -12,7 +12,7 @@ require('./../../stylesheets/app.scss');
 export class App extends Component {
 
   componentDidMount() {
-      this.props.jobStore.getJobs();
+      this.props.jobStore.fetchJobs();
   }
 
   componentWillUpdate(nextProps) {

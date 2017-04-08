@@ -36,23 +36,33 @@ const fetchData = (url, method) => {
 
 class JobStore {
 
+  @observable fetched = window.localStorage.jobsFetched? true: false;
+
   @observable jobs =  [];
 
   @observable jobFilter = undefined;
 
-  getJobs() {
-    fetchData("https://raw.githubusercontent.com/robbyvan/Job-Reminder/master/dist/data/applications.json", "GET")
-      .then((res) => {
-        //Can't write like: [this.jobs = res]
-        JSON.parse(res).map((job) => {
-          // console.log(job);
-          this.jobs.push(job);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        throw err;
-      })
+  fetchJobs() {
+    if (this.fetched === false) {
+      console.log("data have fetched?", this.fetched.toString());
+      fetchData("https://raw.githubusercontent.com/robbyvan/Job-Reminder/master/dist/data/applications.json", "GET")
+        .then((res) => {
+          //Can't write like: [this.jobs = res]
+          window.localStorage.jobs = res;
+          JSON.parse(window.localStorage.jobs).map((job) => {
+            this.jobs.push(job);
+          });
+          window.localStorage.jobsFetched = true;
+          this.fetched = window.localStorage.jobsFetched;
+        })
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        })
+    }else {
+      console.log("fetched?", this.fetched.toString());
+      this.jobs = JSON.parse(window.localStorage.jobs);
+    }
   }
 
   @computed get repliedJobs(){
@@ -97,13 +107,15 @@ class JobStore {
   }
 
   addJob(newJob) {
-    this.jobs.push(newJob) ;
+    this.jobs.push(newJob);
+    window.localStorage.jobs = JSON.stringify(this.jobs);
   }
 
   removeJob(key) {
     this.jobs = this.jobs.filter(
                   (job) => job.id !== key
                 );
+    window.localStorage.jobs = JSON.stringify(this.jobs);
   }
 
   editJob(key, newJob) {
@@ -113,6 +125,7 @@ class JobStore {
       }
       return job;
     });
+    window.localStorage.jobs = JSON.stringify(this.jobs);
   }
 
   changeJobFilter(filter) {
